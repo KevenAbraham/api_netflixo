@@ -1,13 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 
-const contatoRouter = require('./routes/contatoRoutes');
-app.use('/contatos', contatoRouter);
+app.use(cors());
+
+const loginRouter = require('./routes/loginRoutes');
+const videoRouter = require('./routes/videoRoutes');
+app.use('/logins', loginRouter);
+app.use('/videos', videoRouter);
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
