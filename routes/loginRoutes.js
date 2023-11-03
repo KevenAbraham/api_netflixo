@@ -1,6 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const Login = require('../models/login');
+const cors = require('cors');
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: 'GET,POST,PUT,DELETE', // Adicione os métodos que seu servidor aceitará
+}));
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
 
 router.get('/', async (req, res) => {
   try {
