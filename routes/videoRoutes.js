@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Video = require('../models/video');
 
-// Rota para obter todos os contatos
 router.get('/', async (req, res) => {
   try {
     const videos = await Video.find();
@@ -18,8 +17,8 @@ router.get('/:id', getVideo, (req, res) => {
 
 router.post('/', async (req, res) => {
   const video = new Video({
-    title: req.body.nome,
-    link: req.body.email,
+    nome: req.body.title,
+    link: req.body.link,
     foto: req.body.foto,
   });
 
@@ -35,14 +34,8 @@ router.put('/:id', getVideo, async (req, res) => {
   if (req.body.nome != null) {
     res.video.nome = req.body.nome;
   }
-  if (req.body.email != null) {
-    res.video.email = req.body.email;
-  }
-  if (req.body.telefone != null) {
-    res.video.telefone = req.body.telefone;
-  }
-  if (req.body.endereco != null) {
-    res.video.endereco = req.body.endereco;
+  if (req.body.link != null) {
+    res.video.link = req.body.link;
   }
   if (req.body.foto != null) {
     res.video.foto = req.body.foto;

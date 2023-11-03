@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Login = require('../models/login');
 
-// Rota para obter todos os contatos
 router.get('/', async (req, res) => {
   try {
     const logins = await Login.find();
@@ -18,9 +17,9 @@ router.get('/:id', getLogin, (req, res) => {
 
 router.post('/', async (req, res) => {
   const login = new Login({
-    title: req.body.nome,
-    link: req.body.email,
-    foto: req.body.foto,
+    nome: req.body.nome,
+    email: req.body.email,
+    senha: req.body.senha,
   });
 
   try {
@@ -38,14 +37,8 @@ router.put('/:id', getLogin, async (req, res) => {
   if (req.body.email != null) {
     res.login.email = req.body.email;
   }
-  if (req.body.telefone != null) {
-    res.login.telefone = req.body.telefone;
-  }
-  if (req.body.endereco != null) {
-    res.login.endereco = req.body.endereco;
-  }
-  if (req.body.foto != null) {
-    res.login.foto = req.body.foto;
+  if (req.body.senha != null) {
+    res.login.senha = req.body.senha;
   }
 
   try {
@@ -59,7 +52,7 @@ router.put('/:id', getLogin, async (req, res) => {
 router.delete('/:id', getLogin, async (req, res) => {
   try {
     await res.login.remove();
-    res.json({ message: 'Conta excluído com sucesso!' });
+    res.json({ message: 'Conta excluída com sucesso!' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
