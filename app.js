@@ -9,10 +9,10 @@ app.use(express.json());
 
 app.use(cors());
 
-const loginRouter = require('./routes/loginRoutes');
-const videoRouter = require('./routes/videoRoutes');
-app.use('/login', loginRouter);
-app.use('/video', videoRouter);
+const loginRoutes = require('./routes/loginRoutes');
+const videoRoutes = require('./routes/videoRoutes');
+app.use('/logins', loginRoutes);
+app.use('/videos', videoRoutes);
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
