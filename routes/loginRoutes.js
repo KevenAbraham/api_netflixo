@@ -19,6 +19,13 @@ router.get('/:id', getLogin, (req, res) => {
 
 // Rota para criar uma nova conta
 router.post('/', async (req, res) => {
+  // Verifique se o email já está em uso
+  const existingLogin = await Login.findOne({ email: req.body.email });
+
+  if (existingLogin) {
+    return res.status(400).json({ error: 'Email já está em uso.' });
+  }
+
   const login = new Login({
     nome: req.body.nome,
     email: req.body.email,
