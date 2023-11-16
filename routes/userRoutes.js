@@ -27,6 +27,7 @@ router.post('/', async (req, res) => {
 
   // Cria um novo usuário se o e-mail não estiver cadastrado
   const user = new User({
+    nome: req.body.nome,
     email: req.body.email,
     senha: req.body.senha,
   });
@@ -41,6 +42,9 @@ router.post('/', async (req, res) => {
 
 // Rota para atualizar um user por ID
 router.put('/:id', getUser, async (req, res) => {
+  if (req.body.nome != null) {
+    res.user.nome = req.body.nome;
+  }
   if (req.body.email != null) {
     res.user.email = req.body.email;
   }
