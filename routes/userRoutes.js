@@ -38,6 +38,20 @@ router.post('/', async (req, res) => {
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
+
+  const { email, password } = req.body;
+  try {
+    const user = await User.findOne({ email, senha: password });
+    if (!user) {
+      return res.status(401).json({ message: 'Credenciais inválidas' });
+    }
+
+    // Autenticação bem-sucedida
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+
 });
 
 // Rota para atualizar um user por ID
