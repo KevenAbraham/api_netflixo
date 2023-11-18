@@ -41,7 +41,7 @@ router.post('/', async (req, res) => {
 // Rota para atualizar um user por ID
 router.put('/:id', getVideo, async (req, res) => {
   if (req.body.link != null) {
-    res.user.link = req.body.link;
+    res.video.link = req.body.link;
   }
 
   try {
