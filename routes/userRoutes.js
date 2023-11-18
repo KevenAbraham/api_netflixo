@@ -29,7 +29,6 @@ router.post('/', async (req, res) => {
   const user = new User({
     nome: req.body.nome,
     email: req.body.email,
-    senha: req.body.senha,
   });
 
   try {
@@ -37,22 +36,6 @@ router.post('/', async (req, res) => {
     res.status(201).json(newUser);
   } catch (err) {
     res.status(400).json({ message: err.message });
-  }
-});
-
-router.post('/login', async (req, res) => {
-  const { email, senha } = req.body;
-
-  try {
-      const user = await User.findOne({ email, senha });
-      if (!user) {
-          return res.status(401).json({ mensagem: 'Credenciais inválidas' });
-      }
-
-      // Aqui, você pode gerar um token JWT ou enviar outro tipo de resposta de sucesso
-      return res.status(200).json({ token: 'seu_token_jwt', mensagem: 'Login bem-sucedido' });
-  } catch (err) {
-      return res.status(500).json({ mensagem: err.message });
   }
 });
 
