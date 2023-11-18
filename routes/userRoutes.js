@@ -40,6 +40,22 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.post('/login', async (req, res) => {
+  const { email, senha } = req.body;
+
+  try {
+      const user = await User.findOne({ email, senha });
+      if (!user) {
+          return res.status(401).json({ mensagem: 'Credenciais inválidas' });
+      }
+
+      // Aqui, você pode gerar um token JWT ou enviar outro tipo de resposta de sucesso
+      return res.status(200).json({ token: 'seu_token_jwt', mensagem: 'Login bem-sucedido' });
+  } catch (err) {
+      return res.status(500).json({ mensagem: err.message });
+  }
+});
+
 // Rota para atualizar um user por ID
 router.put('/:id', getUser, async (req, res) => {
   if (req.body.nome != null) {
