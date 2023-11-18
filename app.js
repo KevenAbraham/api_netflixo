@@ -11,6 +11,8 @@ app.use(cors());
 
 const userRoutes = require('./routes/userRoutes');
 app.use('/logins', userRoutes);
+const videoRoutes = require('./routes/videoRoutes');
+app.use('/links', videoRoutes);
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
