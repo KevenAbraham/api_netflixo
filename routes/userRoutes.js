@@ -42,11 +42,11 @@ router.post('/', async (req, res) => {
   } else if (req.body.action === 'login') {
     // Se a ação for "login", verifica as credenciais e faz login
     try {
-      const user = await User.findOne({ email: req.body.email, senha: req.body.senha });
-      if (user) {
+      const user = await User.findOne({ email: req.body.email });
+      if (user && user.senha === req.body.senha) {
         res.status(200).json(user);
       } else {
-        res.status(401).json({ message: 'Credenciais inválidas' });
+        res.status(401).json({ message: 'Credenciais ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRO' });
       }
     } catch (err) {
       res.status(500).json({ message: err.message });
